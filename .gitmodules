@@ -1,0 +1,3 @@
+[submodule "devel-metapackage/opt/devel-metapackage/third-party/libhid"]
+	path = devel-metapackage/opt/devel-metapackage/third-party/libhid
+	url = https://git.altlinux.org/gears/l/libhid.git

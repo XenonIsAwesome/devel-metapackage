@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+
+THIRD_PARTY_DIR="/opt/devel-metapackage/third-party"
+
+pushd $THIRD_PARTY_DIR
+
+# extract rabbitmq-c
+echo "Installing rabbitmq-c v0.13.0"
+tar xzf rabbitmq-c_v0.13.0.tar.gz
+
+# build & install rabbitmq-c
+mkdir -p "rabbitmq-c-0.13.0/build"
+pushd "rabbitmq-c-0.13.0/build"
+cmake ..
+make -j$(nproc)
+sudo make install
+popd
+
+# extract SimpleAmqpClient
+echo "Installing SimpleAmqpClient v2.5.1"
+tar xzf SimpleAmqpClient_v2.5.1.tar.gz
+
+# build & install SimpleAmqpClient
+mkdir -p "SimpleAmqpClient-2.5.1/build"
+pushd "SimpleAmqpClient-2.5.1/build"
+cmake ..
+make -j$(nproc)
+sudo make install
+popd
+
+# echo "Installing libhid"
+# pushd "libhid/libhid"
+# ./configure
+# make -j$(nproc)
+# sudo make install
+# popd
+
+popd
+
+sudo ldconfig
+
+# cleanup
+# sudo rm -rf $THIRD_PARTY_DIR
